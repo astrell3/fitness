@@ -24,12 +24,19 @@ func parsePackage(data string) (int, time.Duration, error) {
 		return 0, 0, fmt.Errorf("неверный формат данных")
 	}
 
-	stepsStr := strings.TrimSpace(parts[0])
-	durationStr := strings.TrimSpace(parts[1])
+	stepsStr := parts[0]
+	durationStr := parts[1]
 
 	if strings.Contains(stepsStr, " ") {
 		return 0, 0, fmt.Errorf("неверный формат шагов")
 	}
+
+	if strings.Contains(durationStr, " ") {
+		return 0, 0, fmt.Errorf("неверный формат времени")
+	}
+
+	stepsStr = strings.TrimSpace(stepsStr)
+	durationStr = strings.TrimSpace(durationStr)
 
 	steps, err := strconv.Atoi(stepsStr)
 	if err != nil {
